@@ -1,7 +1,7 @@
 # Written by EnvyingGolem47
 # 3/8/2023
 
-# Current Version Date: 10/25/2023
+# Current Version Date: 12/6/2023
 
 import re
 
@@ -12,6 +12,8 @@ class ConflictingInputsDetected(Exception):
 
     For Example, such as when two or more bool statements are being switched on
     and are incompatible toggles.
+
+    Another Example, an invalid input without the correct toggle was used can use this exception.
     """
     pass
 
@@ -198,7 +200,7 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
             except:
                 break
 
-def PermutationCalculator(NumOfPoints:int):
+def PermutationCalculator(NumOfPoints:int,NumOfValues:int):
     """
     simple code that allows computing the number of possible permutations
     a sequence of points can have.
@@ -210,15 +212,15 @@ def PermutationCalculator(NumOfPoints:int):
     Returns int.
 
     :param NumOfPoints:
+    :param: NumOFValues
     :return:
     """
-
     x = 0
     for i in range(NumOfPoints+1):
-        if(i == 0):
-            x = 1
+        if(x==0):
+            x=NumOfValues
         else:
-            x = x * i
+            x = x * NumOfValues
     return x
 
 def SanitizeString(string:str,TestFor:bool=False,PrintFound:bool=True,bannedcharacters:list=['$','&','{','}','\\','/','[',']']):
@@ -257,3 +259,39 @@ def SanitizeString(string:str,TestFor:bool=False,PrintFound:bool=True,bannedchar
             string.replace(i,'')
 
         return string
+
+def getMedian(inputList:list,sortList:bool=True,IsNotOnlyNumbers:bool=False):
+    """
+    Prints the median of the given NUMERICAL list.
+
+    If sortList is set to false, the function will not sort it for you.
+
+    If IsNotOnlyNumbers is set to true, it will output the middle values.
+
+    This will return None if given an empty list.
+
+    :param inputList:
+    :param sortList:
+    :param IsNotOnlyNumbers:
+    :return: 
+    """
+
+    if(len(inputList) == 1):
+        return inputList[0]
+    elif(len(inputList) == 0):
+        return None
+
+    for i in range(1):
+        if(sortList == True):
+            inputList.sort()
+
+    if(IsNotOnlyNumbers == False):
+        if(len(inputList) % 2 != 0):
+            return inputList[int((len(inputList)/2) - .5)]
+        else:
+            return ((inputList[(len(inputList)//2)-1]+inputList[(len(inputList)//2)])/2)
+    else:
+        if(len(inputList) % 2 != 0):
+            return inputList[int((len(inputList)/2) - .5)]
+        else:
+            return [inputList[int((len(inputList)/2) - .5)],inputList[int((len(inputList)/2) + .5)]]
