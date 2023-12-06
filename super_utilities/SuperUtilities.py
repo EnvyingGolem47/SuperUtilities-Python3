@@ -18,7 +18,8 @@ class ConflictingInputsDetected(Exception):
     pass
 
 def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acceptedAnswers=[],AACaseSensitive:bool=True
-           ,UseRegularExpression:bool=False,RegularExpression=r'',ReturnREListOnly:bool=False,printBypass:bool=False):
+           ,UseRegularExpression:bool=False,RegularExpression=r'',ReturnREListOnly:bool=False
+           ,printBypass:bool=False,inputBypass=None,useInputBypass:bool=False):
     """
     Similar to input() but contains its own exception handling
     As well as auto converting to the desired type.
@@ -42,6 +43,9 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
         Invalid - Invalid input
         Cancelled - The input was cancelled (this shouldn't be possible but is here just in case)
 
+    inputBypass is used in conjuction with printBypass to allow for full intigration with a gui.
+        must toggle it with useInputBypass=True
+
     :param prompt:
     :param IsInt:
     :param IsBool:
@@ -58,7 +62,11 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
     while True:
         try:
 
-            inp = input(prompt)
+            for i in range(1):
+                if useInputBypass == False:
+                    inp = input(prompt)
+                else:
+                    inp = inputBypass
 
             if(UseRegularExpression and RegularExpression != r'' and re.compile(RegularExpression).findall(inp) == []):
 
