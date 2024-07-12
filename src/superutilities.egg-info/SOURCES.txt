@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+src/superutilities/__init__.py
+src/superutilities/__main__.py
+src/superutilities.egg-info/PKG-INFO
+src/superutilities.egg-info/SOURCES.txt
+src/superutilities.egg-info/dependency_links.txt
+src/superutilities.egg-info/requires.txt
+src/superutilities.egg-info/top_level.txt

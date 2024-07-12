@@ -1,7 +1,7 @@
 # Written by EnvyingGolem47
 # 3/8/2023
 
-# Current Version Date: 12/6/2023
+# Current Version Date: 7/11/2024
 
 import re
 
@@ -264,7 +264,8 @@ def SanitizeString(string:str,TestFor:bool=False,PrintFound:bool=True,bannedchar
     else:
 
         for i in bannedcharacters:
-            string.replace(i,'')
+            
+            string = string.replace(i,'')
 
         return string
 
