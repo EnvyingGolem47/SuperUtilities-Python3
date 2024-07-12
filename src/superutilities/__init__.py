@@ -1,8 +1,5 @@
-import re
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-from super_utilities import SuperUtilities
-
-app.register_blueprint(SuperUtilities)
+from .main import ConflictingInputsDetected
+from .main import SanitizeString
+from .main import SInput
+from .main import PermutationCalculator
+from .main import getMedian
