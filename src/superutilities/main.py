@@ -1,9 +1,10 @@
 # Written by EnvyingGolem47
 # 3/8/2023
 
-# Current Version Date: 7/11/2024
+# Current Version Date: 9/9/2024
 
 import re
+import json
 
 class ConflictingInputsDetected(Exception):
     """
@@ -223,22 +224,26 @@ def PermutationCalculator(NumOfPoints:int,NumOfValues:int):
     :param: NumOFValues
     :return:
     """
-    x = 0
-    for i in range(NumOfPoints+1):
-        if(x==0):
-            x=NumOfValues
-        else:
-            x = x * NumOfValues
-    return x
 
-def SanitizeString(string:str,TestFor:bool=False,PrintFound:bool=True,bannedcharacters:list=['$','&','{','}','\\','/','[',']']):
+    def fct(n):
+        fact = 1
+
+        for i in range(1, n+1):
+            fact = fact * i
+
+        return fact
+
+    return fct(NumOfPoints)/fct(NumOfPoints-NumOfValues)
+
+def SanitizeString(string:str, TestFor:bool=False, PrintFound:bool=True,
+                   bannedCharacters:list=['$', '&', '{', '}', '\\', '/', '[', ']']):
     """
     PrintFound will only matter if TestFor is set to True.
 
     :param string:
     :param TestFor:
     :param PrintFound:
-    :param bannedcharacters:
+    :param bannedCharacters:
     :return:
     """
 
@@ -246,7 +251,7 @@ def SanitizeString(string:str,TestFor:bool=False,PrintFound:bool=True,bannedchar
 
         found = []
 
-        for i in bannedcharacters:
+        for i in bannedCharacters:
 
             if(i in string and not PrintFound):
                 del found
@@ -263,7 +268,7 @@ def SanitizeString(string:str,TestFor:bool=False,PrintFound:bool=True,bannedchar
 
     else:
 
-        for i in bannedcharacters:
+        for i in bannedCharacters:
             
             string = string.replace(i,'')
 
@@ -304,3 +309,33 @@ def getMedian(inputList:list,sortList:bool=True,IsNotOnlyNumbers:bool=False):
             return inputList[int((len(inputList)/2) - .5)]
         else:
             return [inputList[int((len(inputList)/2) - .5)],inputList[int((len(inputList)/2) + .5)]]
+
+def saveJsonToFile(file_path:str,data,indent:int=4):
+    """
+    Saves a dictionary, or a list, to a JSON file.
+
+    Has no internal error handling.
+
+    :param file_path:
+    :param data:
+    :return:
+    """
+    with open(file_path,'w') as file:
+        json.dump(data,file,indent=indent)
+
+    file.close()
+
+def getJsonFromFile(file_path:str):
+    """
+    Reads and returns a JSON file as a dictionary, or a list.
+
+    Has no internal error handling.
+
+    :param file_path:
+    :return:
+    """
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+    file.close()
+    return data
