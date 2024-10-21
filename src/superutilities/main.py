@@ -1,7 +1,7 @@
 # Written by EnvyingGolem47
 # 3/8/2023
 
-# Current Version Date: 9/9/2024
+# Current Version Date: 10/20/2024
 
 import re
 import json
@@ -63,11 +63,10 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
     while True:
         try:
 
-            for i in range(1):
-                if useInputBypass == False:
-                    inp = input(prompt)
-                else:
-                    inp = inputBypass
+            if useInputBypass == False:
+                inp = input(prompt)
+            else:
+                inp = inputBypass
 
             if(UseRegularExpression and RegularExpression != r'' and re.compile(RegularExpression).findall(inp) == []):
 
@@ -235,6 +234,17 @@ def PermutationCalculator(NumOfPoints:int,NumOfValues:int):
 
     return fct(NumOfPoints)/fct(NumOfPoints-NumOfValues)
 
+def CombinationsCalculator(NumOfPoints:int,NumOfValues:int):
+    """
+    Shortcut for remembering how to calculate possible combinations.
+
+    :param NumOfPoints:
+    :param NumOfValues:
+    :return:
+    """
+
+    return NumOfValues ** NumOfPoints
+
 def SanitizeString(string:str, TestFor:bool=False, PrintFound:bool=True,
                    bannedCharacters:list=['$', '&', '{', '}', '\\', '/', '[', ']']):
     """
@@ -295,9 +305,8 @@ def getMedian(inputList:list,sortList:bool=True,IsNotOnlyNumbers:bool=False):
     elif(len(inputList) == 0):
         return None
 
-    for i in range(1):
-        if(sortList == True):
-            inputList.sort()
+    if(sortList == True):
+        inputList.sort()
 
     if(IsNotOnlyNumbers == False):
         if(len(inputList) % 2 != 0):

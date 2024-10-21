@@ -35,6 +35,11 @@ This was made primarily for a python coding class, apologies it is a little out 
   - NumOfValues:int - Number of values that a point/spot could have.
  
 
+- **CombinationsCalculator**: Just a shortcut for calculating combinations.
+  - NumOfPoints:int - Number of points/spots for a value to be.
+  - NumOfValues:int - Number of values that a point/spot could have.
+
+
 - **GetMedian**: Returns the middle of a list, with a bool to automatically sort it for you.
   - inputList:list - The list to get the median of.
   - sortList:bool - Should python sort the list automatically?
