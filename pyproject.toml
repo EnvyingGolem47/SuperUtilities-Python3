@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "superutilities"
-version = "0.2.2"
+version = "0.2.3"
 description = "A custom made python 3 file that adds some features that aim to streamline the coding process. This was made primarily for a python coding class, apologies it is a little out of the blue."
 readme = "README.md"
 authors = [{ name = "EnvyingGolem47", email = "envyinggolem47@projectnightfall.net" }]

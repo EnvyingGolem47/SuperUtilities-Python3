@@ -1,7 +1,7 @@
 # Written by EnvyingGolem47
 # 3/8/2023
 
-# Current Version Date: 10/20/2024
+# Current Version Date: 11/5/2024
 
 import re
 import json
@@ -246,14 +246,18 @@ def CombinationsCalculator(NumOfPoints:int,NumOfValues:int):
     return NumOfValues ** NumOfPoints
 
 def SanitizeString(string:str, TestFor:bool=False, PrintFound:bool=True,
-                   bannedCharacters:list=['$', '&', '{', '}', '\\', '/', '[', ']']):
+                   bannedCharacters:list=['$', '&', '{', '}', '\\', '/', '[', ']'],
+                   replaceWith:str=''):
     """
     PrintFound will only matter if TestFor is set to True.
+
+    replaceWith will replace whatever is sanitized with that respective string. Default is nothing.
 
     :param string:
     :param TestFor:
     :param PrintFound:
     :param bannedCharacters:
+    :param replaceWith:
     :return:
     """
 
@@ -280,7 +284,7 @@ def SanitizeString(string:str, TestFor:bool=False, PrintFound:bool=True,
 
         for i in bannedCharacters:
             
-            string = string.replace(i,'')
+            string = string.replace(i,replaceWith)
 
         return string
 

@@ -28,6 +28,7 @@ This was made primarily for a python coding class, apologies it is a little out 
   - TestFor:bool - Returns true if it finds a 'banned character' in the string.
   - PrintFound:bool - Makes TestFor return the characters found in the string. (Must have TestFor set to true for it to have any effect)
   - bannedCharacters:list - A list of strings of banned characters to remove from the string.
+  - replaceWith: - A string to replace sanitized characters with. Default is nothing.
 
 
 - **PermutationCalculator**: A small function that returns the number of possible combinations of certain points and values.
