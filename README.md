@@ -1,5 +1,5 @@
 # SuperUtilities-Python3
-A custom made python 3 file that adds some features that aim to streamline the coding process.
+A custom-made python 3 file that adds some features that aim to streamline the coding process.
 
 This was made primarily for a python coding class, apologies it is a little out of the blue.
 
@@ -58,3 +58,13 @@ This was made primarily for a python coding class, apologies it is a little out 
 ### Classes:
 
 - **ConflictingInputsDetected**: An error class that is fired when using conflicting arguments in a function.
+
+
+- **Logger**: A class that is designed to streamline the process of saving logs to a .txt file.
+  - log_directory:str - The directory name / path to store the log files in.
+  - file_date_format:str - The datetime to_str() format to use when naming the .txt files.
+  - timestamp_format:str - The datetime to_str() format to use when timestamping individual logs.
+  - **log()**:
+    - text:str - The text to log.
+    - tag:str - A tag that will be put before the text. Meant for INFO, WARN, and ERROR tags. 
+    - print_to_console:bool - Whether to print the log to the console.

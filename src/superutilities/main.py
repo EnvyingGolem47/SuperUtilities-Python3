@@ -1,10 +1,11 @@
 # Written by EnvyingGolem47
 # 3/8/2023
 
-# Current Version Date: 11/5/2024
+# Current Version Date: 4/21/2025
 
 import re
 import json
+import datetime
 
 class ConflictingInputsDetected(Exception):
     """
@@ -17,6 +18,54 @@ class ConflictingInputsDetected(Exception):
     Another Example, an invalid input without the correct toggle was used can use this exception.
     """
     pass
+
+class Logger:
+    def __init__(self,log_directory:str,file_date_format:str='%m-%d-%Y',timestamp_format:str='%H:%M:%S - '):
+        """
+        A Class to make creating and populating log files a little bit easier in python.
+
+        The only required variable is 'log_directory', which all it needs is the directory name / path to store the log files in.
+
+        :param log_directory:
+        :param file_date_format:
+        :param timestamp_format:
+        """
+
+        self.log_directory = log_directory
+        self.file_date_format = file_date_format
+        self.timestamp_format = timestamp_format
+
+    def log(self,text:str,tag:str='',print_to_console:bool=True,new_line:bool=True):
+        """
+        Logs desired text to a log file.
+
+        'text' is the text that is to be stored in the log file (i.e. 'Program started.")
+
+        'tag' is an optional variable that will come before the text, it can be anything but is intended for WARN, INFO, and ERROR tags.
+
+        If 'print_to_console' is True, then it will also use print to output it to the console.
+
+        If 'new_line' is True, then the next log made will be on a newline.
+
+        :param text:
+        :param tag:
+        :param print_to_console:
+        :param new_line:
+        """
+
+        log_text = datetime.datetime.strftime(datetime.datetime.now(), "%H:%M:%S - ") + tag + text
+
+        log_file = open(self.log_directory+datetime.datetime.strftime(datetime.datetime.now(),self.file_date_format)+'.txt','a')
+
+        if print_to_console:
+            print(log_text)
+
+        if new_line:
+            log_file.write(log_text+'\n')
+        else:
+            log_file.write(log_text)
+
+        log_file.close()
 
 def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acceptedAnswers=[],AACaseSensitive:bool=True
            ,UseRegularExpression:bool=False,RegularExpression=r'',ReturnREListOnly:bool=False
