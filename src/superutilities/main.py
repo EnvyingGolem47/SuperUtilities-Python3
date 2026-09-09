@@ -1,11 +1,12 @@
 # Written by EnvyingGolem47
 # 3/8/2023
-
-# Current Version Date: 4/21/2025
+# Current Version Date: 9/9/2026
 
 import re
 import json
 import datetime
+import os
+from pathlib import Path
 
 class ConflictingInputsDetected(Exception):
     """
@@ -66,6 +67,71 @@ class Logger:
             log_file.write(log_text)
 
         log_file.close()
+
+    def clean_logs(self,days_to_keep:int):
+        """
+        Will remove all logs that are older than specified in days_to_keep.
+
+        :param days_to_keep:
+        """
+
+        log_files = sorted(Path(self.log_directory).iterdir(), key=os.path.getmtime)
+
+        amount_to_delete = len(log_files) - days_to_keep
+
+        if amount_to_delete < 0:
+            amount_to_delete = 0
+
+        for i in range(amount_to_delete):
+            os.remove(log_files[i])
+
+class Menu:
+    def __init__(self,options:dict=None,title_name:str=None):
+        """
+        Experimental WIP.
+
+        :param options:
+        :param title_name:
+        """
+        if options is None:
+            self.options = {}
+        else:
+            self.options = options
+            try:
+                self.options.pop('quit')
+            except KeyError:
+                pass
+
+        if title_name is None:
+            self.title_name = "Menu"
+        else:
+            self.title_name = title_name
+
+        self.option_names = list(self.options.keys())
+
+    def new_option(self,name:str,function_to_run):
+        if name in self.options.keys() or name == 'quit':
+            return False
+        else:
+            self.options[name] = function_to_run
+            return True
+
+    def run_cli_menu_loop(self):
+        while True:
+            print(f"{'=='*(32//len(self.title_name))} [ {self.title_name} ] {'=='*(32//len(self.title_name))}")
+            for i,option in enumerate(self.option_names):
+                print(f'|-{i} : {option}')
+            print(f'|-{len(self.option_names)} : quit')
+
+            print("Enter number or option name")
+            user_input = input(": ")
+
+            if user_input in self.option_names:
+                self.options[user_input]()
+            elif user_input.isnumeric() and int(user_input) < len(self.option_names):
+                self.options[self.option_names[int(user_input)]]()
+            elif user_input == 'quit' or int(user_input) == len(self.option_names):
+                break
 
 def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acceptedAnswers=[],AACaseSensitive:bool=True
            ,UseRegularExpression:bool=False,RegularExpression=r'',ReturnREListOnly:bool=False
