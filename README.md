@@ -68,3 +68,5 @@ This was made primarily for a python coding class, apologies it is a little out 
     - text:str - The text to log.
     - tag:str - A tag that will be put before the text. Meant for INFO, WARN, and ERROR tags. 
     - print_to_console:bool - Whether to print the log to the console.
+  - **clean_logs()**: Deletes old log files.
+    - days_to_keep:int - Amount of days of logs to keep. (So the amount that WONT be deleted.)
