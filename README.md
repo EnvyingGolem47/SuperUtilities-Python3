@@ -21,7 +21,7 @@ This was made primarily for a python coding class, apologies it is a little out 
   - printBypass:bool - Disables the print function.
   - inputBypass - The user's input given by a separate function (For use in GUI environments).
   - useInputBypass:bool - Should the function use the input given from the inputBypass argument.
- 
+  - printQuestion:bool - Used when you need the question to be printed first before the actual input call. This is for some edge cases when using with cloud infrastructure.
 
 - **SanitizeString**: A function that removes, strips, and detects certain combinations of strings or regex within other strings. Built with the idea of being used to prevent inputs that could lead to unintended outputs.
   - string:str - The string to sanitize.

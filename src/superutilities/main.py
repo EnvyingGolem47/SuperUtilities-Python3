@@ -1,6 +1,6 @@
 # Written by EnvyingGolem47
 # 3/8/2023
-# Current Version Date: 9/9/2026
+# Current Version Date: 9/15/2026
 
 import re
 import json
@@ -135,7 +135,7 @@ class Menu:
 
 def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acceptedAnswers=[],AACaseSensitive:bool=True
            ,UseRegularExpression:bool=False,RegularExpression=r'',ReturnREListOnly:bool=False
-           ,printBypass:bool=False,inputBypass=None,useInputBypass:bool=False):
+           ,printBypass:bool=False,inputBypass=None,useInputBypass:bool=False,printQuestion:bool=False):
     """
     Similar to input() but contains its own exception handling
     As well as auto converting to the desired type.
@@ -162,6 +162,8 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
     inputBypass is used in conjuction with printBypass to allow for full intigration with a gui.
         must toggle it with useInputBypass=True
 
+    printQuestion is used when you need the question to be printed first before the actual input call. This is for some edge cases when using with cloud infrastructure.
+
     :param prompt:
     :param IsInt:
     :param IsBool:
@@ -172,6 +174,7 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
     :param RegularExpression:
     :param ReturnREListOnly:
     :param printBypass:
+    :param printQuestion:
     :return:
     """
 
@@ -179,7 +182,11 @@ def SInput(prompt:str,IsInt:bool=False,IsBool:bool=False,IsFloat:bool=False,acce
         try:
 
             if useInputBypass == False:
-                inp = input(prompt)
+                if printQuestion == True:
+                    print(prompt)
+                    inp = input("")
+                else:
+                    inp = input(prompt)
             else:
                 inp = inputBypass
 
